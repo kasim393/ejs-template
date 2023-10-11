@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <style>
+      h1 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lr-format-container">
+      <div class="first-row">
+        <span class="page-no">Page 1 of 1</span>
+        <table style="border-bottom: none">
+          <thead>
+            <tr>
+              <th colspan="2">Consignment Note (Lorry Receipt)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="display: flex; justify-content: space-between">
+              <td>
+                <div class="first_row_cols">
+                  <div><img class="img-logo" src="lrlogo" alt="" /></div>
+                  <div class="first_row_cols_div">
+                    <div>
+                      <h3><%= transporterName %></h3>
+                      <span><%= transporterGSTIN %></span>
+                      <p>Address: <%= transporterAddress %></p>
+                    </div>
+                    <div class="first_row_cols_div_phone">
+                      <div>
+                        <p>Email: <%= transporterEmail %></p>
+                        <p style="display: flex; align-items: center; gap: 5px">
+                          Verified by Transporter:<img alt="yes" width="25px" />
+                          (trsComments)
+                        </p>
+                      </div>
+                      <div>
+                        <p>&nbsp;&nbsp;Phone: <%= transporterPhone %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td style="border-left: 2px solid">
+                <div class="first_row_cols2">
+                  <div>
+                    <h3>Consignment Note No.</h3>
+                    <h3>(L.R. no)</h3>
+                  </div>
+                  <div>
+                    <p style="margin-top: 10px"><%= lrNumber %></p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <img class="qr-code-img" src="imgs/logo.png" alt="qr code" />
+      </div>
+      <div class="second-row">
+        <table style="border-bottom: none">
+          <thead>
+            <tr>
+              <th>Consignor details</th>
+              <th>consignee details</th>
+              <th colspan="2">Shipment details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 28%">
+                <div class="second_row_cols">
+                  <div>
+                    <p><u>Name:</u> consignorName</p>
+                    <p><u>GST:</u> consignorGSTIN</p>
+                    <p>
+                      <u>Loading point address (as per Invoice):</u>
+                      loadingPointAddress
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td style="width: 28%">
+                <div class="second_row_cols">
+                  <div>
+                    <p><u>Name:</u> consigneeName</p>
+                    <p><u>GST:</u> consigneeGSTIN</p>
+                    <p><u>Delivery address:</u> deliveryAddress</p>
+                  </div>
+                </div>
+              </td>
+              <td style="width: 44%">
+                <div class="second_row_cols" style="padding-bottom: 1px">
+                  <div style="flex: 1">
+                    <p><u>Dispatch Date:</u> dispatchDate</p>
+                    <p><u>Shipment No:</u> shipmentNumber</p>
+                    <p><u>E-way Bill No:</u> eWayBillNumber</p>
+                    <p><u>Invoice No.:</u> invoiceNumber</p>
+                    <p><u>Invoice Date.:</u> invoiceDate</p>
+                    <p><u>Invoice value(Rs):</u> invoiceValueRs</p>
+                  </div>
+                  <div style="flex: 1">
+                    <p><u>Vehicle No:</u> vehicleNumber</p>
+                    <p><u>Driver: </u> driverName</p>
+                    <p><u>Driver No: </u> driverPhoneNumber</p>
+                    <p><u>Net Weight:</u> 100</p>
+                    <p><u>Charged Weight:</u> 100</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="third-row">
+        <table>
+          <thead class="third_row_head">
+            <tr>
+              <th colspan="5">Materials as per Invoice</th>
+              <th colspan="4" style="width: 280px">
+                Goods conditions & quantity as per Receiver
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="width: 50px">Sr.No</td>
+              <td>Product Details</td>
+              <td style="width: 100px">Bundles / Pcs</td>
+              <td style="width: 80px">UOM</td>
+              <td style="width: 80px">Quantity</td>
+              <td style="width: 90px">Net Wt.(kg)</td>
+              <td>Perfect</td>
+              <td>Missing</td>
+              <td>damage</td>
+            </tr>
+            <% materials.forEach((product, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= product.name %></td>
+              <td><%= product.pcs %></td>
+              <td><%= product.unit %></td>
+              <td><%= product.quantity %></td>
+              <td><%= product.weight %></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <% }) %>
+
+            <tr>
+              <td colspan="5" style="text-align: left">
+                <div class="term">
+                  <p>
+                    <u><b>TERMS AND CONDITIONS:</b></u
+                    ><b>
+                      This consignment has been booked subject to the following
+                      Terms and Conditions, which the Consignor(s), the
+                      Consignee(s) and/or it’s/their agents have read,
+                      understood and agreed:</b
+                    >
+                  </p>
+                  <ul>
+                    <li>
+                      The consignment is booked and carried at the Owner’s risk,
+                      unless specifically certified by transporterName (the
+                      “Transporter”).
+                    </li>
+                    <li>
+                      Transporter will not be responsible for any kind or
+                      quantity of loss, damage, breakage, leakage, pilferage,
+                      spoilage or destruction whatsoever of the consignment,
+                      arising out of or resulting from –
+                      <ul>
+                        <li>improper, insufficient and/or weak packing</li>
+                        <li>inadequacy of make</li>
+                        <li>
+                          force majeure event, including but not limited to
+                          earthquake, floods, rain, war, etc.
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      Transporter carries consignment on "Said to Contain" basis
+                      and is unaware of the nature, contents, conditions or
+                      value of the goods transported within.
+                    </li>
+                    <li>
+                      The vehicle owner and driver assume and accept complete
+                      responsibility of carrying the consignment safely and in
+                      full, from origin to destination.
+                    </li>
+                    <li>
+                      Consignor will purchase it's/his/her own transit insurance
+                      to cover itself/himself/herself from any and every risk
+                      during transit of the consignment.
+                    </li>
+                    <li>
+                      Consignee is obliged to unload the consignment and
+                      acknowledge its delivery within 12 hours of the vehicle's
+                      arrival time at the destination, failing which appropriate
+                      demurrage will be charged.
+                    </li>
+                    <li>
+                      Transporter reserves the right to transship consignment to
+                      another vehicle at it's sole discretion.
+                    </li>
+                    <li>
+                      Transporter reserves the right to deviate from any
+                      customary or usual route(s) and carry goods by any other
+                      route, as deemed fit by it.
+                    </li>
+                    <li>
+                      Consignor assumes and accepts any and every consequence
+                      that arises out of false declaration of this consignment.
+                    </li>
+                    <li>
+                      Consignor is solely responsible for obtaining appropriate
+                      regulatory & other permits for delivery of the consignment
+                      and hand it over to the Transporter 's representative.
+                    </li>
+                    <li>
+                      It is a regulatory requirement on part of the Consignor
+                      and Consignee to declare their CGST/SGST/IGST/UTGST
+                      Registration number and PAN no. If any consignment is
+                      detained for want of this information, or any matter
+                      arises in relation to any regulatory requirement with
+                      respect to the consignment, the responsibility rests
+                      solely with the Consignor and the Consignee, and they will
+                      be solely liable for all consequences whatsoever,
+                      financially or otherwise. The Transporter shall in no way
+                      be liable, accountable or penalized for the same.
+                    </li>
+                    <li>
+                      All the above Terms & Conditions are subject to
+                      contracts/agreements entered with the Consignor/Consignee
+                      as the case may be.
+                    </li>
+                  </ul>
+                </div>
+              </td>
+              <td colspan="3" style="text-align: left; width: 280px">
+                <div class="sign">
+                  <div>
+                    <% if (toPay) { %>
+                    <p>To Pay</p>
+                    <% } else { %>
+                    <p>To be billed at: <%= billAt %></p>
+                    <% } %>
+
+                    <b
+                      style="
+                        font-size: 14px;
+                        display: block;
+                        margin-bottom: 5px;
+                      "
+                      >Delivery acknowledgement</b
+                    >
+                    <p>Receiver:</p>
+                    <p>Date:</p>
+                    <p>Comments:</p>
+                  </div>
+                  <div class="sign_img_container">
+                    <img class="sign_img" src="imgs/logo.png" alt="sign" />
+                  </div>
+                  <div class="horizontal-line"></div>
+                  <div>
+                    <p>For transporterName</p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
